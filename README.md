@@ -46,7 +46,6 @@ node dev.js
  - `opts <Object>` Options for the link
   - `grape <String>` Address of the Grenache Grape instance
   - `requestTimeout <Number>` Default timeout for requests to Grape network
-  - `fetch <Function>` WHATWG fetch API compatible client, defaults to `window.fetch`
 
 
 #### link.start() => link
