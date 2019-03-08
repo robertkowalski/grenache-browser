@@ -4,9 +4,10 @@ Minimalistic Grenache HTTP implementation for the browser.
 
 Aim is to have full browser compatability with the smallest amounts of deps as possible, to reduce file sizes for the frontend.
 
-To use Grenache in the Browser, CORS headers must be set by a proxy (e.g. haproxy or nginx).
+To use Grenache in the Browser, CORS headers must be set by a proxy (e.g. haproxy or nginx). In dev mode, [we use express](/example/dev.js).
 
-In dev mode, [we use express](/example/dev.js)
+![browser.png](browser.png)
+
 
 ## Usage
 
