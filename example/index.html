@@ -1,0 +1,62 @@
+<html>
+<head>
+  <style>
+    .res-box {
+      position: relative;
+      border: 1px solid #eee;
+      height: 100px;
+      width: 500px;
+      margin-bottom: 20px;
+    }
+    .res-box-wrapper {}
+  </style>
+  <script src="./dist.js"></script>
+
+  <script>
+    const _$ = (cls) => document.getElementsByClassName(cls.replace(/^\./, ''))[0]
+    const { Link, PeerRPCClient } = Grenache
+
+    window.addEventListener('load', function (event) {
+      demo()
+    })
+
+    function demo () {
+      const link = new Link({
+        grape: 'http://127.0.0.1:1337'
+      }).start()
+
+      link.lookup('rpc_test', {}, (err, res) => {
+        _$('.parsed-lookup-box').innerText = err || res || 'error: empty result'
+      })
+
+      const peer = new PeerRPCClient(link, { ssl: false })
+      peer.init()
+
+      const opts = { timeout: 100000 }
+      peer.request('rpc_test', { hello: 'world' }, opts, (err, res) => {
+        _$('.parsed-client-box').innerText = err || JSON.stringify(res) || 'error: empty result'
+      })
+    }
+  </script>
+</head>
+<body>
+<div class="res-box-wrapper">
+  Lookups:
+  <div class="res-box">
+    <div style="float:left; margin-right: 50px;">
+      <pre>link.lookup('rpc_test')</pre>
+      <pre class="parsed-lookup-box"></pre>
+    </div>
+  </div>
+</div>
+<div class="res-box-wrapper">
+  RPC Client request:
+  <div class="res-box">
+    <div style="float:left; margin-right: 50px;">
+      <pre>peer.request('rpc_test', { hello: 'world' })</pre>
+      <pre class="parsed-client-box"></pre>
+    </div>
+  </div>
+</div>
+</body>
+</html>
